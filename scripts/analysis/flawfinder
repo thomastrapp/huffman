@@ -1,0 +1,25 @@
+flawfinder [project src dir]
+
+Tue Jul 22 13:12:37 CEST 2014
+  Flawfinder version 1.27, (C) 2001-2004 David A. Wheeler.
+  Number of dangerous functions in C/C++ ruleset: 160
+  Examining ../../src/sp/program-options-validate.h
+  Examining ../../src/sp/file-exists.h
+  Examining ../../src/sp/program-options.h
+  Examining ../../src/hm/encode-tree.h
+  Examining ../../src/hm/decode-tree.h
+  Examining ../../src/hm/exception.h
+  Examining ../../src/hm/decode.h
+  Examining ../../src/hm/encode.h
+  Examining ../../src/hm/common.h
+  Examining ../../src/main.cpp
+
+  No hits found.
+  Lines analyzed = 1629 in 0.55 seconds (30251 lines/second)
+  Physical Source Lines of Code (SLOC) = 1051
+  Hits@level = [0]   0 [1]   0 [2]   0 [3]   0 [4]   0 [5]   0
+  Hits@level+ = [0+]   0 [1+]   0 [2+]   0 [3+]   0 [4+]   0 [5+]   0
+  Hits/KSLOC@level+ = [0+]   0 [1+]   0 [2+]   0 [3+]   0 [4+]   0 [5+]   0
+  Minimum risk level = 1
+  There may be other security vulnerabilities; review your code!
+
