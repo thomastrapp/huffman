@@ -78,5 +78,13 @@ OPTION(SYMBOLS "Add debugging symbols" OFF)
 IF(SYMBOLS)
   ADD_DEFINITIONS("-g")
 ENDIF(SYMBOLS)
+
+# gprof build
+OPTION(GPROF "gprof build" OFF)
+IF(GPROF)
+  # -pg must be set when compiling and linking
+  ADD_DEFINITIONS("-pg")
+  SET(CMAKE_EXE_LINKER_FLAGS "-pg")
+ENDIF(GPROF)
 ###########################################################
 
