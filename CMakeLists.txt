@@ -66,6 +66,11 @@ IF(TCMALLOC)
   # -fno-omit-frame-pointer must be set if you configured gperftools with
   # --enable-frame-pointers
   #ADD_DEFINITIONS("-fno-omit-frame-pointer")
+
+  # force compiler to use tcmalloc
+  ADD_DEFINITIONS(
+    "-fno-builtin-malloc" "-fno-builtin-calloc"
+    "-fno-builtin-realloc" "-fno-builtin-free")
 ENDIF(TCMALLOC)
 
 # force debug symbols (e.g. cmake -DCMAKE_BUILD_TYPE=Release -DSYMBOLS=ON)
