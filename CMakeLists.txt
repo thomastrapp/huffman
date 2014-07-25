@@ -63,9 +63,9 @@ OPTION(TCMALLOC "Link with libtcmalloc" OFF)
 IF(TCMALLOC)
   TARGET_LINK_LIBRARIES(huffman tcmalloc)
 
-  # remove this if you didn't configure gperftools with
-  # --enable-frame-pointers (recommended for x86_64)
-  ADD_DEFINITIONS("-fno-omit-frame-pointer")
+  # -fno-omit-frame-pointer must be set if you configured gperftools with
+  # --enable-frame-pointers
+  #ADD_DEFINITIONS("-fno-omit-frame-pointer")
 ENDIF(TCMALLOC)
 
 # force debug symbols (e.g. cmake -DCMAKE_BUILD_TYPE=Release -DSYMBOLS=ON)
