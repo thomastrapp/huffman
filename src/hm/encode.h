@@ -392,15 +392,6 @@ void encode_entities(
   else if( auto leaf = dynamic_cast<const hm::enc_leaf<entity_type> *>(node) )
   {
     hm::encode_type(leaf->get_entity(), out);
-    /*const entity_type entity = leaf->get_entity();
-    // violation of strict alias rule?
-    const uint8_t * byte_wise = reinterpret_cast<const uint8_t *>(
-      &(entity)
-    );
-    for(hm::meta::entity_size_type i = 0; i < md.entity_size; ++i)
-    {
-      *out++ = byte_wise[i];
-    }*/
     md.entity_count++;
   }
   // else: node == null, ignore
