@@ -30,6 +30,8 @@ Project structure:
   Huffman source
 - **test/src/**    
   Unit tests
+- **benchmark/src/**    
+  Benchmarks
 - **scripts/**    
   Helper scripts
 
@@ -50,10 +52,18 @@ cmake -DCMAKE_BUILD_TYPE=Debug ..
 make
 ./huffman-test
 ```
-The unit testing framework ([googletest](http://code.google.com/p/googletest/ "Google Code: googletest")) will automatically be downloaded and built by cmake.
+
+Build benchmarks:
+------------------
+```
+cd benchmark/build
+cmake .. # defaults to release mode
+make
+./huffman-benchmark --benchmark_repetitions=10
+```
 
 Dependencies:
 --------------
-cmake >= 2.8.7, boost (`boost::program_options`), [datas-and-algos](https://github.com/thomastrapp/datas-and-algos) (`ds::priority_queue`, `util::make_unique`) and googletest.  
-The dependencies on googletest and datas-and-algos are automatically satisfied through cmake (Module ExternalProject).
+cmake >= 2.8.7, boost (`boost::program_options`), [datas-and-algos](https://github.com/thomastrapp/datas-and-algos "Github: datas-and-algos") (`ds::priority_queue`, `util::make_unique`), [googletest](http://code.google.com/p/googletest/ "Google Code: googletest") and [googlebenchmark](https://github.com/google/benchmark "Github: googlebenchmark").  
+The dependencies on googletest, googlebenchmark and datas-and-algos are automatically satisfied through cmake (Module `ExternalProject`).
 
