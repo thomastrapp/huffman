@@ -12,6 +12,11 @@ INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/src")
 # add huffman's src/ directory as an additional include directory
 INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/../src")
 
+# default to release mode for benchmarking
+IF(NOT CMAKE_BUILD_TYPE)
+  MESSAGE(STATUS "Building release")
+  SET(CMAKE_BUILD_TYPE "Release")
+ENDIF(NOT CMAKE_BUILD_TYPE)
 
 ###### EXTERNAL DEPENDENCIES ##############################
 SET_DIRECTORY_PROPERTIES(PROPERTIES EP_PREFIX ${CMAKE_BINARY_DIR}/thirdparty)
