@@ -9,6 +9,38 @@
 #include "hm/common.h"
 #include "hm/encode.h"
 
+namespace old {
+
+template<
+  typename entity_type
+>
+void
+orig_build_huffman_table(
+  const hm::enc_node<entity_type> * node,
+  std::unordered_map<entity_type, hm::code_type>& table,
+  hm::code_type prefix = hm::code_type()
+)
+{
+  if( auto tree = dynamic_cast<const hm::enc_tree<entity_type> *>(node) )
+  {
+    hm::code_type left_prefix = prefix;
+    left_prefix.push_back(0);
+    old::orig_build_huffman_table(tree->get_left(), table, left_prefix);
+
+    hm::code_type right_prefix = prefix;
+    right_prefix.push_back(1);
+    old::orig_build_huffman_table(tree->get_right(), table, right_prefix);
+  }
+  else if( auto leaf = dynamic_cast<const hm::enc_leaf<entity_type> *>(node) )
+  {
+    table[leaf->get_entity()] = prefix;
+  }
+  // else: node == nullptr, ignore
+}
+
+
+}
+
 namespace {
 
 /// create a huffman tree with unique leaves
@@ -44,6 +76,20 @@ static void BM_BuildHuffmanTable(benchmark::State& state)
 }
 
 BENCHMARK(BM_BuildHuffmanTable);
+
+
+static void BM_BuildHuffmanTableOriginal(benchmark::State& state)
+{
+  state.PauseTiming();
+  auto tree = get_tree();
+  state.ResumeTiming();
+  while( state.KeepRunning() )
+  {
+    std::unordered_map<uint64_t, hm::code_type> table;
+    ::old::orig_build_huffman_table(tree, table);
+  }
+}
+BENCHMARK(BM_BuildHuffmanTableOriginal);
 
 
 }
