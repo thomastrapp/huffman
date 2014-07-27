@@ -14,13 +14,13 @@ namespace {
 /// create a huffman tree with unique leaves
 std::unique_ptr<hm::enc_node<uint64_t>> build_tree(size_t num_leaves)
 {
-  uint64_t vec[num_leaves];
-  for(uint64_t i = 0; i < num_leaves; ++i)
+  std::vector<uint64_t> vec(num_leaves);
+  for(uint64_t i = 0; i < vec.size(); ++i)
   {
     vec[i] = i;
   }
-  uint8_t * begin = reinterpret_cast<uint8_t *>(vec);
-  uint8_t * end = reinterpret_cast<uint8_t *>(vec + num_leaves);
+  uint8_t * begin = reinterpret_cast<uint8_t *>(vec.data());
+  uint8_t * end = reinterpret_cast<uint8_t *>(vec.data() + vec.size());
   auto tree = hm::build_huffman_tree<uint64_t>(begin, end);
   return std::move(tree);
 }
