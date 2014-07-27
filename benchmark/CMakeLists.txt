@@ -28,6 +28,8 @@ ExternalProject_Add(
     GIT_REPOSITORY https://github.com/google/benchmark.git
     TIMEOUT 10
 
+    CMAKE_ARGS -DCMAKE_BUILD_TYPE:STRING=Release
+
     UPDATE_COMMAND ""
     INSTALL_COMMAND ""
 
