@@ -33,10 +33,13 @@ hm::enc_node<uint64_t> * get_tree()
 
 static void BM_BuildHuffmanTable(benchmark::State& state)
 {
+  state.PauseTiming();
+  auto tree = get_tree();
+  state.ResumeTiming();
   while( state.KeepRunning() )
   {
     std::unordered_map<uint64_t, hm::code_type> table;
-    hm::build_huffman_table(get_tree(), table);
+    hm::build_huffman_table(tree, table);
   }
 }
 
