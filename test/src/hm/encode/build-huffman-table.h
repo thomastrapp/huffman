@@ -16,7 +16,8 @@ namespace {
 TEST(HmBuildHuffmanTable, NoTree)
 {
   std::unordered_map<char, hm::code_type> table;
-  hm::build_huffman_table<char>(static_cast<hm::enc_node<char> *>(nullptr), table);
+  hm::code_type prefix;
+  hm::build_huffman_table<char>(static_cast<hm::enc_node<char> *>(nullptr), table, prefix);
   EXPECT_EQ(table.size(), 0);
 }
 
@@ -35,7 +36,8 @@ TYPED_TEST(HmBuildHuffmanTableT, ValidCodes)
     auto tree = hm::build_huffman_tree<entity_type>(vec.begin(), vec.end());
 
     std::unordered_map<entity_type, hm::code_type> table;
-    hm::build_huffman_table<entity_type>(tree.get(), table);
+    hm::code_type prefix;
+    hm::build_huffman_table<entity_type>(tree.get(), table, prefix);
     ASSERT_FALSE(tree.get() == nullptr && table.size() > 0);
     EXPECT_EQ(table.size(), freq_table.size());
 

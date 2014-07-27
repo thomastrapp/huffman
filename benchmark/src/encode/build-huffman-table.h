@@ -71,10 +71,10 @@ static void BM_BuildHuffmanTable(benchmark::State& state)
   while( state.KeepRunning() )
   {
     std::unordered_map<uint64_t, hm::code_type> table;
-    hm::build_huffman_table(tree, table);
+    hm::code_type prefix;
+    hm::build_huffman_table(tree, table, prefix);
   }
 }
-
 BENCHMARK(BM_BuildHuffmanTable);
 
 

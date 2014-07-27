@@ -180,7 +180,7 @@ void
 build_huffman_table(
   const hm::enc_node<entity_type> * node,
   std::unordered_map<entity_type, hm::code_type>& table,
-  hm::code_type prefix = hm::code_type()
+  hm::code_type& prefix
 )
 {
   if( auto tree = dynamic_cast<const hm::enc_tree<entity_type> *>(node) )
@@ -190,7 +190,7 @@ build_huffman_table(
     hm::build_huffman_table(tree->get_left(), table, left_prefix);
 
     prefix.push_back(1);
-    hm::build_huffman_table(tree->get_right(), table, std::move(prefix));
+    hm::build_huffman_table(tree->get_right(), table, prefix);
   }
   else if( auto leaf = dynamic_cast<const hm::enc_leaf<entity_type> *>(node) )
   {
@@ -230,7 +230,8 @@ void encode_data(
   // which will just cast entity_type to size_t.
   // (See _Cxx_hashtable_define_trivial_hash in functional_hash.h)
   std::unordered_map<entity_type, hm::code_type> table;
-  hm::build_huffman_table<entity_type>(tree, table);
+  hm::code_type prefix;
+  hm::build_huffman_table<entity_type>(tree, table, prefix);
 
   uint8_t byte = 0;
 

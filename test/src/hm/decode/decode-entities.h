@@ -52,7 +52,8 @@ TYPED_TEST(HmDecodeEntitiesT, DecodesEntities)
       // build a tree and encode its entities
       auto tree = hm::build_huffman_tree<entity_type>(input.begin(), input.end());
       std::unordered_map<entity_type, hm::code_type> table;
-      hm::build_huffman_table<entity_type>(tree.get(), table);
+      hm::code_type prefix;
+      hm::build_huffman_table<entity_type>(tree.get(), table, prefix);
       hm::encode_entities<entity_type>(tree.get(), std::back_inserter(out), md);
 
       auto entities = hm::decode_entities(out.begin(), out.end(), md);
