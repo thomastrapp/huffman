@@ -27,7 +27,7 @@ std::unique_ptr<hm::enc_node<uint64_t>> build_tree(size_t num_leaves)
 
 hm::enc_node<uint64_t> * get_tree()
 {
-  static std::unique_ptr<hm::enc_node<uint64_t>> tree = build_tree(1ULL << 18);
+  static std::unique_ptr<hm::enc_node<uint64_t>> tree = build_tree(1ULL << 16);
   return tree.get();
 }
 
