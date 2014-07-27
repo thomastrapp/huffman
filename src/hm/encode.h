@@ -187,11 +187,10 @@ build_huffman_table(
   {
     hm::code_type left_prefix = prefix;
     left_prefix.push_back(0);
-    build_huffman_table(tree->get_left(), table, left_prefix);
+    hm::build_huffman_table(tree->get_left(), table, left_prefix);
 
-    hm::code_type right_prefix = prefix;
-    right_prefix.push_back(1);
-    build_huffman_table(tree->get_right(), table, right_prefix);
+    prefix.push_back(1);
+    hm::build_huffman_table(tree->get_right(), table, std::move(prefix));
   }
   else if( auto leaf = dynamic_cast<const hm::enc_leaf<entity_type> *>(node) )
   {
