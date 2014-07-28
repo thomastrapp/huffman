@@ -57,7 +57,6 @@ IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
 ENDIF(CMAKE_BUILD_TYPE STREQUAL "Debug")
 ###########################################################
 
-
 ###### BUILD OPTIONS ######################################
 OPTION(TCMALLOC "Link with libtcmalloc" OFF)
 IF(TCMALLOC)
@@ -67,10 +66,12 @@ IF(TCMALLOC)
   # --enable-frame-pointers
   #ADD_DEFINITIONS("-fno-omit-frame-pointer")
 
-  # force compiler to use tcmalloc
-  ADD_DEFINITIONS(
-    "-fno-builtin-malloc" "-fno-builtin-calloc"
-    "-fno-builtin-realloc" "-fno-builtin-free")
+  # force gcc to use tcmalloc
+  IF(CMAKE_COMPILER_IS_GNUCXX)
+    ADD_DEFINITIONS(
+      "-fno-builtin-malloc" "-fno-builtin-calloc"
+      "-fno-builtin-realloc" "-fno-builtin-free")
+  ENDIF(CMAKE_COMPILER_IS_GNUCXX)
 ENDIF(TCMALLOC)
 
 # force debug symbols (e.g. cmake -DCMAKE_BUILD_TYPE=Release -DSYMBOLS=ON)
