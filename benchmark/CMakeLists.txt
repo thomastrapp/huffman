@@ -78,3 +78,16 @@ TARGET_LINK_LIBRARIES(huffman-benchmark pthread)
 # dependency on datas-and-algos
 ADD_DEPENDENCIES(huffman-benchmark datas-and-algos)
 
+###### BUILD OPTIONS ######################################
+# enable whole-program optimization on gcc
+OPTION(WPO  "Use whole-program optimization on gcc" OFF)
+IF(WPO)
+  IF(CMAKE_COMPILER_IS_GNUCXX)
+    ADD_DEFINITIONS("-fwhole-program")
+    SET(CMAKE_EXE_LINKER_FLAGS "-fwhole-program")
+  ELSE()
+    MESSAGE(STATUS "compiler not g++, cannot use -fwhole-program")
+  ENDIF()
+ENDIF(WPO)
+###########################################################
+
